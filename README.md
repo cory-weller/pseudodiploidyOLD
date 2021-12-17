@@ -1,5 +1,16 @@
 # pseudodiploidy
 
+## Singularity
+### Install Singularity
+```
+bash src/install_singularity.sh
+```
+
+### Build Singularity image
+```
+singularity build --fakeroot src/r.sif src/r.def
+```
+
 ## Retrieve data
 ```
 bash src/getData.sh

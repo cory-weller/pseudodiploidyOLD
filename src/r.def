@@ -1,0 +1,18 @@
+BootStrap: library
+From: ubuntu:16.04
+
+%post
+    apt-get -y update
+    apt-get install -y r-base r-base-dev
+    
+    # libcurl4-openssl-dev libopenmpi-dev openmpi-bin openmpi-common openmpi-doc openssh-client openssh-server libssh-dev wget vim git nano git cmake  gfortran g++ curl wget python autoconf bzip2 libtool libtool-bin python-pip python-dev
+
+    R --no-echo -e "install.packages('data.table', repos='http://cran.us.r-project.org')"
+
+%environment
+    export LANG="en_US.UTF-8"
+    export LC_ALL="C"
+    export DEBIAN_FRONTEND="noninteractive"
+
+%runscript
+    R
