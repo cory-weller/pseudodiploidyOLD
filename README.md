@@ -25,17 +25,28 @@ bash src/getData.sh
 ## Transform data
 ```
 # Build count matrix for DESeq
-Rscript src/buildCountMatrix.R \
+singularity exec -H $PWD:/home src/R.sif Rscript \
+    src/buildCountMatrix.R \
     data/input/combined_featurecounts.csv \
     data/input/samples.csv \
     data/processed/featurecounts.mat.RDS
-    data/processed/pseudohaploid_DEseq_dds.RDS
 
 # Build TPM table for other analyses
-Rscript src/buildTPMtable.R \
+singularity exec -H $PWD:/home src/R.sif Rscript \
+    src/buildTPMtable.R \
     data/input/combined_featurecounts.csv \
     data/input/samples.csv \
     data/processed/TPM.txt.gz
+
+# Build DESeq Data Set (DDS) Object
+singularity exec -H $PWD:/home src/R.sif Rscript \
+    src/buildDDS.R \
+    data/processed/featurecounts.mat.RDS \
+    data/input/samples.csv \
+    data/processed/DDS.RDS
+
+# Run differential expression contrasts
+
 ```
 
 
@@ -51,4 +62,9 @@ Rscript src/runDESeq.R \
 # Build heatmap
 ```
 Rscript src/heatmap.R
+```
+
+# Run exploratory analyses
+```
+singularity run -H $PWD:/home src/R.sif
 ```

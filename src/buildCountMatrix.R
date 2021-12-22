@@ -3,10 +3,12 @@
 library(data.table)
 library(DESeq2)
 library(foreach)
-library(R.utils)
 
 args <- commandArgs(trailingOnly = TRUE)
 
+# args <- c("data/input/combined_featurecounts.csv",
+#            "data/input/samples.csv",
+#            "data/processed/featurecounts.mat.RDS")
 
 featureCountsFilename <- args[1]
 coldataFilename <- args[2]
